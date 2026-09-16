@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin changer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+    <!-- Constants -->
+    <script>
+        const weaponNames = {
+            13: "Scattergun",
+            200: "ScattergunR",
+            45: "ForceANature",
+            220: "TheShortstop",
+            448: "TheSodaPopper",
+            669: "FestiveScattergun",
+            772: "BabyFacesBlaster",
+            799: "SilverBotkillerScattergunMkI",
+            808: "GoldBotkillerScattergunMkI",
+            888: "RustBotkillerScattergunMkI",
+            897: "BloodBotkillerScattergunMkI",
+            906: "CarbonadoBotkillerScattergunMkI",
+            915: "DiamondBotkillerScattergunMkI",
+            964: "SilverBotkillerScattergunMkII",
+            973: "GoldBotkillerScattergunMkII",
+            1078: "FestiveForceANature",
+            1103: "TheBackScatter",
+            15002: "NightTerror",
+            15015: "TartanTorpedo",
+            15021: "CountryCrusher",
+            15029: "BackcountryBlaster",
+            15036: "SpruceDeuce",
+            15053: "CurrentEvent",
+            15065: "MacabreWeb",
+            15069: "Nutcracker",
+            15106: "BlueMew",
+            15107: "FlowerPower",
+            15108: "ShottoHell",
+            15131: "CoffinNail",
+            15151: "KillerBee",
+            15157: "Corsair",
+            23: "ScoutsPistol",
+            209: "PistolR",
+            46: "BonkAtomicPunch",
+            160: "VintageLugermorph",
+            163: "CritaCola",
+            222: "MadMilk",
+            294: "Lugermorph",
+            449: "TheWinger",
+            773: "PrettyBoysPocketPistol",
+            812: "TheFlyingGuillotine",
+            833: "TheFlyingGuillotineG",
+            1121: "MutatedMilk",
+            1145: "FestiveBonk",
+            15013: "RedRockRoscoe",
+            15018: "HomemadeHeater",
+            15035: "HickoryHolepuncher",
+            15041: "LocalHero",
+            15046: "BlackDahlia",
+            15056: "SandstoneSpecial",
+            15060: "MacabreWeb",
+            15061: "Nutcracker",
+            15100: "BlueMew",
+            15101: "BrainCandy",
+            15102: "ShottoHell",
+            15126: "DressedToKill",
+            15148: "Blitzkrieg",
+            30666: "TheCAPPER",
+            0: "Bat",
+            190: "BatR",
+            44: "TheSandman",
+            221: "TheHolyMackerel",
+            317: "TheCandyCane",
+            325: "TheBostonBasher",
+            349: "SunonaStick",
+            355: "TheFanOWar",
+            450: "TheAtomizer",
+            452: "ThreeRuneBlade",
+            474: "TheConscientiousObjector",
+            572: "UnarmedCombat",
+            648: "TheWrapAssassin",
+            660: "FestiveBat",
+            880: "TheFreedomStaff",
+            939: "TheBatOuttaHell",
+            954: "TheMemoryMaker",
+            999: "FestiveHolyMackerel",
+            1013: "TheHamShank",
+            1123: "TheNecroSmasher",
+            1127: "TheCrossingGuard",
+            30667: "Batsaber",
+            30758: "PrinnyMachete",
+            18: "RocketLauncher",
+            205: "RocketLauncherR",
+            127: "TheDirectHit",
+            228: "TheBlackBox",
+            237: "RocketJumper",
+            414: "TheLibertyLauncher",
+            441: "TheCowMangler5000",
+            513: "TheOriginal",
+            658: "FestiveRocketLauncher",
+            730: "TheBeggarsBazooka",
+            800: "SilverBotkillerRocketLauncherMkI",
+            809: "GoldBotkillerRocketLauncherMkI",
+            889: "RustBotkillerRocketLauncherMkI",
+            898: "BloodBotkillerRocketLauncherMkI",
+            907: "CarbonadoBotkillerRocketLauncherMkI",
+            916: "DiamondBotkillerRocketLauncherMkI",
+            965: "SilverBotkillerRocketLauncherMkII",
+            974: "GoldBotkillerRocketLauncherMkII",
+            1085: "FestiveBlackBox",
+            1104: "TheAirStrike",
+            15006: "WoodlandWarrior",
+            15014: "SandCannon",
+            15028: "AmericanPastoral",
+            15043: "SmalltownBringdown",
+            15052: "ShellShocker",
+            15057: "AquaMarine",
+            15081: "Autumn",
+            15104: "BlueMew",
+            15105: "BrainCandy",
+            15129: "CoffinNail",
+            15130: "HighRollers",
+            15150: "Warhawk",
+            10: "SoldiersShotgun",
+            199: "ShotgunR",
+            129: "TheBuffBanner",
+            133: "Gunboats",
+            226: "TheBattalionsBackup",
+            354: "TheConcheror",
+            415: "TheReserveShooter",
+            442: "TheRighteousBison",
+            444: "TheMantreads",
+            1001: "FestiveBuffBanner",
+            1101: "TheBASEJumper",
+            1141: "FestiveShotgun",
+            1153: "PanicAttack",
+            15003: "BackwoodsBoomstick",
+            15016: "RusticRuiner",
+            15044: "CivicDuty",
+            15047: "LightningRod",
+            15085: "Autumn",
+            15109: "FlowerPower",
+            15132: "CoffinNail",
+            15133: "DressedtoKill",
+            15152: "RedBear",
+            6: "Shovel",
+            196: "ShovelR",
+            128: "TheEqualizer",
+            154: "ThePainTrain",
+            357: "TheHalfZatoichi",
+            416: "TheMarketGardener",
+            447: "TheDisciplinaryAction",
+            775: "TheEscapePlan",
+            21: "FlameThrower",
+            208: "FlameThrowerR",
+            40: "TheBackburner",
+            215: "TheDegreaser",
+            594: "ThePhlogistinator",
+            659: "FestiveFlameThrower",
+            741: "TheRainblower",
+            798: "SilverBotkillerFlameThrowerMkI",
+            807: "GoldBotkillerFlameThrowerMkI",
+            887: "RustBotkillerFlameThrowerMkI",
+            896: "BloodBotkillerFlameThrowerMkI",
+            905: "CarbonadoBotkillerFlameThrowerMkI",
+            914: "DiamondBotkillerFlameThrowerMkI",
+            963: "SilverBotkillerFlameThrowerMkII",
+            972: "GoldBotkillerFlameThrowerMkII",
+            1146: "FestiveBackburner",
+            1178: "DragonsFury",
+            15005: "ForestFire",
+            15017: "BarnBurner",
+            15030: "BovineBlazemaker",
+            15034: "EarthSkyandFire",
+            15049: "FlashFryer",
+            15054: "TurbineTorcher",
+            15066: "Autumn",
+            15067: "PumpkinPatch",
+            15068: "Nutcracker",
+            15089: "Balloonicorn",
+            15090: "Rainbow",
+            15115: "CoffinNail",
+            15141: "Warhawk",
+            30474: "NostromoNapalmer",
+            12: "PyrosShotgun",
+            39: "TheFlareGun",
+            351: "TheDetonator",
+            595: "TheManmelter",
+            740: "TheScorchShot",
+            1081: "FestiveFlareGun",
+            1179: "ThermalThruster",
+            1180: "GasPasser",
+            2: "FireAxe",
+            192: "FireAxeR",
+            38: "TheAxtinguisher",
+            153: "Homewrecker",
+            214: "ThePowerjack",
+            326: "TheBackScratcher",
+            348: "SharpenedVolcanoFragment",
+            457: "ThePostalPummeler",
+            466: "TheMaul",
+            593: "TheThirdDegree",
+            739: "TheLollichop",
+            813: "NeonAnnihilator",
+            834: "NeonAnnihilatorG",
+            1000: "TheFestiveAxtinguisher",
+            1181: "HotHand",
+            19: "GrenadeLauncher",
+            206: "GrenadeLauncherR",
+            308: "TheLochnLoad",
+            405: "AliBabasWeeBooties",
+            608: "TheBootlegger",
+            996: "TheLooseCannon",
+            1007: "FestiveGrenadeLauncher",
+            1151: "TheIronBomber",
+            15077: "Autumn",
+            15079: "MacabreWeb",
+            15091: "Rainbow",
+            15092: "SweetDreams",
+            15116: "CoffinNail",
+            15117: "TopShelf",
+            15142: "Warhawk",
+            15158: "ButcherBird",
+            20: "StickybombLauncher",
+            207: "StickybombLauncherR",
+            130: "TheScottishResistance",
+            131: "TheCharginTarge",
+            265: "StickyJumper",
+            406: "TheSplendidScreen",
+            661: "FestiveStickybombLauncher",
+            797: "SilverBotkillerStickybombLauncherMkI",
+            806: "GoldBotkillerStickybombLauncherMkI",
+            886: "RustBotkillerStickybombLauncherMkI",
+            895: "BloodBotkillerStickybombLauncherMkI",
+            904: "CarbonadoBotkillerStickybombLauncherMkI",
+            913: "DiamondBotkillerStickybombLauncherMkI",
+            962: "SilverBotkillerStickybombLauncherMkII",
+            971: "GoldBotkillerStickybombLauncherMkII",
+            1099: "TheTideTurner",
+            1144: "FestiveTarge",
+            1150: "TheQuickiebombLauncher",
+            15009: "SuddenFlurry",
+            15012: "CarpetBomber",
+            15024: "BlastedBombardier",
+            15038: "RooftopWrangler",
+            15045: "LiquidAsset",
+            15048: "PinkElephant",
+            15082: "Autumn",
+            15083: "PumpkinPatch",
+            15084: "MacabreWeb",
+            15113: "SweetDreams",
+            15137: "CoffinNail",
+            15138: "DressedtoKill",
+            15155: "Blitzkrieg",
+            1: "Bottle",
+            191: "BottleR",
+            132: "TheEyelander",
+            172: "TheScotsmansSkullcutter",
+            266: "HorselessHeadlessHorsemannsHeadtaker",
+            307: "UllapoolCaber",
+            327: "TheClaidheamhMor",
+            404: "ThePersianPersuader",
+            482: "NessiesNineIron",
+            609: "TheScottishHandshake",
+            1082: "FestiveEyelander",
+            15: "Minigun",
+            202: "MinigunR",
+            41: "Natascha",
+            298: "IronCurtain",
+            312: "TheBrassBeast",
+            424: "Tomislav",
+            654: "FestiveMinigun",
+            793: "SilverBotkillerMinigunMkI",
+            802: "GoldBotkillerMinigunMkI",
+            811: "TheHuoLongHeater",
+            832: "TheHuoLongHeaterG",
+            850: "Deflector_mvm",
+            882: "RustBotkillerMinigunMkI",
+            891: "BloodBotkillerMinigunMkI",
+            900: "CarbonadoBotkillerMinigunMkI",
+            909: "DiamondBotkillerMinigunMkI",
+            958: "SilverBotkillerMinigunMkII",
+            967: "GoldBotkillerMinigunMkII",
+            15004: "KingoftheJungle",
+            15020: "IronWood",
+            15026: "AntiqueAnnihilator",
+            15031: "WarRoom",
+            15040: "CitizenPain",
+            15055: "BrickHouse",
+            15086: "MacabreWeb",
+            15087: "PumpkinPatch",
+            15088: "Nutcracker",
+            15098: "BrainCandy",
+            15099: "MisterCuddles",
+            15123: "CoffinNail",
+            15124: "DressedtoKill",
+            15125: "TopShelf",
+            15147: "ButcherBird",
+            11: "HeavysShotgun",
+            42: "Sandvich",
+            159: "TheDalokohsBar",
+            311: "TheBuffaloSteakSandvich",
+            425: "TheFamilyBusiness",
+            433: "Fishcake",
+            863: "RoboSandvich",
+            1002: "FestiveSandvich",
+            1190: "SecondBanana",
+            5: "Fists",
+            195: "FistsR",
+            43: "TheKillingGlovesofBoxing",
+            239: "GlovesofRunningUrgently",
+            310: "WarriorsSpirit",
+            331: "FistsofSteel",
+            426: "TheEvictionNotice",
+            587: "ApocoFists",
+            656: "TheHolidayPunch",
+            1084: "FestiveGlovesofRunningUrgently",
+            1100: "TheBreadBite",
+            1184: "GlovesofRunningUrgentlyMvM",
+            9: "EngineersShotgun",
+            141: "TheFrontierJustice",
+            527: "TheWidowmaker",
+            588: "ThePomson6000",
+            997: "TheRescueRanger",
+            1004: "FestiveFrontierJustice",
+            22: "EngineersPistol",
+            140: "TheWrangler",
+            528: "TheShortCircuit",
+            1086: "FestiveWrangler",
+            30668: "TheGigarCounter",
+            7: "Wrench",
+            197: "WrenchR",
+            142: "TheGunslinger",
+            155: "TheSouthernHospitality",
+            169: "GoldenWrench",
+            329: "TheJag",
+            589: "TheEurekaEffect",
+            662: "FestiveWrench",
+            795: "SilverBotkillerWrenchMkI",
+            804: "GoldBotkillerWrenchMkI",
+            884: "RustBotkillerWrenchMkI",
+            893: "BloodBotkillerWrenchMkI",
+            902: "CarbonadoBotkillerWrenchMkI",
+            911: "DiamondBotkillerWrenchMkI",
+            960: "SilverBotkillerWrenchMkII",
+            969: "GoldBotkillerWrenchMkII",
+            15073: "Nutcracker",
+            15074: "Autumn",
+            15075: "Boneyard",
+            15139: "DressedtoKill",
+            15140: "TopShelf",
+            15114: "TorquedtoHell",
+            15156: "Airwolf",
+            25: "ConstructionPDA",
+            737: "ConstructionPDAR",
+            26: "DestructionPDA",
+            28: "PDA",
+            17: "SyringeGun",
+            204: "SyringeGunR",
+            36: "TheBlutsauger",
+            305: "CrusadersCrossbow",
+            412: "TheOverdose",
+            1079: "FestiveCrusadersCrossbow",
+            29: "MediGun",
+            211: "MediGunR",
+            35: "TheKritzkrieg",
+            411: "TheQuickFix",
+            663: "FestiveMediGun",
+            796: "SilverBotkillerMediGunMkI",
+            805: "GoldBotkillerMediGunMkI",
+            885: "RustBotkillerMediGunMkI",
+            894: "BloodBotkillerMediGunMkI",
+            903: "CarbonadoBotkillerMediGunMkI",
+            912: "DiamondBotkillerMediGunMkI",
+            961: "SilverBotkillerMediGunMkII",
+            970: "GoldBotkillerMediGunMkII",
+            998: "TheVaccinator",
+            15008: "MaskedMender",
+            15010: "WrappedReviver",
+            15025: "ReclaimedReanimator",
+            15039: "CivilServant",
+            15050: "SparkofLife",
+            15078: "Wildwood",
+            15097: "FlowerPower",
+            15121: "DressedToKill",
+            15122: "HighRollers",
+            15145: "Blitzkrieg",
+            15146: "Corsair",
+            8: "Bonesaw",
+            198: "BonesawR",
+            37: "TheUbersaw",
+            173: "TheVitaSaw",
+            304: "Amputator",
+            413: "TheSolemnVow",
+            1003: "FestiveUbersaw",
+            1143: "FestiveBonesaw",
+            14: "SniperRifle",
+            201: "SniperRifleR",
+            56: "TheHuntsman",
+            230: "TheSydneySleeper",
+            402: "TheBazaarBargain",
+            526: "TheMachina",
+            664: "FestiveSniperRifle",
+            752: "TheHitmansHeatmaker",
+            792: "SilverBotkillerSniperRifleMkI",
+            801: "GoldBotkillerSniperRifleMkI",
+            851: "TheAWPerHand",
+            881: "RustBotkillerSniperRifleMkI",
+            890: "BloodBotkillerSniperRifleMkI",
+            899: "CarbonadoBotkillerSniperRifleMkI",
+            908: "DiamondBotkillerSniperRifleMkI",
+            957: "SilverBotkillerSniperRifleMkII",
+            966: "GoldBotkillerSniperRifleMkII",
+            1005: "FestiveHuntsman",
+            1092: "TheFortifiedCompound",
+            1098: "TheClassic",
+            15000: "NightOwl",
+            15007: "PurpleRange",
+            15019: "LumberFromDownUnder",
+            15023: "ShotintheDark",
+            15033: "Bogtrotter",
+            15059: "Thunderbolt",
+            15070: "PumpkinPatch",
+            15071: "Boneyard",
+            15072: "Wildwood",
+            15111: "Balloonicorn",
+            15112: "Rainbow",
+            15135: "CoffinNail",
+            15136: "DressedtoKill",
+            15154: "Airwolf",
+            30665: "ShootingStar",
+            16: "SMG",
+            203: "SMGR",
+            57: "TheRazorback",
+            58: "Jarate",
+            231: "DarwinsDangerShield",
+            642: "CozyCamper",
+            751: "TheCleanersCarbine",
+            1083: "FestiveJarate",
+            1105: "TheSelfAwareBeautyMark",
+            1149: "FestiveSMG",
+            15001: "WoodsyWidowmaker",
+            15022: "PlaidPotshotter",
+            15032: "TreadplateTormenter",
+            15037: "TeamSprayer",
+            15058: "LowProfile",
+            15076: "Wildwood",
+            15110: "BlueMew",
+            15134: "HighRollers",
+            15153: "Blitzkrieg",
+            3: "Kukri",
+            193: "KukriR",
+            171: "TheTribalmansShiv",
+            232: "TheBushwacka",
+            401: "TheShahanshah",
+            24: "Revolver",
+            210: "RevolverR",
+            61: "TheAmbassador",
+            161: "BigKill",
+            224: "LEtranger",
+            460: "TheEnforcer",
+            525: "TheDiamondback",
+            1006: "FestiveAmbassador",
+            1142: "FestiveRevolver",
+            15011: "PsychedelicSlugger",
+            15027: "OldCountry",
+            15042: "Mayor",
+            15051: "DeadReckoner",
+            15062: "Boneyard",
+            15063: "Wildwood",
+            15064: "MacabreWeb",
+            15103: "FlowerPower",
+            15128: "TopShelf",
+            15149: "Blitzkrieg",
+            735: "Sapper",
+            736: "SapperR",
+            810: "TheRedTapeRecorder",
+            831: "TheRedTapeRecorderG",
+            933: "TheApSapG",
+            1080: "FestiveSapper",
+            1102: "TheSnackAttack",
+            4: "Knife",
+            194: "KnifeR",
+            225: "YourEternalReward",
+            356: "ConniversKunai",
+            461: "TheBigEarner",
+            574: "TheWangaPrick",
+            638: "TheSharpDresser",
+            649: "TheSpycicle",
+            665: "FestiveKnife",
+            727: "TheBlackRose",
+            794: "SilverBotkillerKnifeMkI",
+            803: "GoldBotkillerKnifeMkI",
+            883: "RustBotkillerKnifeMkI",
+            892: "BloodBotkillerKnifeMkI",
+            901: "CarbonadoBotkillerKnifeMkI",
+            910: "DiamondBotkillerKnifeMkI",
+            959: "SilverBotkillerKnifeMkII",
+            968: "GoldBotkillerKnifeMkII",
+            15094: "BlueMew",
+            15095: "BrainCandy",
+            15096: "StabbedtoHell",
+            15118: "DressedtoKill",
+            15119: "TopShelf",
+            15143: "Blitzkrieg",
+            15144: "Airwolf",
+            27: "DisguiseKitPDA",
+            30: "InvisWatch",
+            212: "InvisWatchR",
+            59: "TheDeadRinger",
+            60: "TheCloakandDagger",
+            297: "EnthusiastsTimepiece",
+            947: "TheQuackenbirdt",
+            264: "FryingPan",
+            1071: "GoldFryingPan",
+            423: "Saxxy",
+        };
+
+        const skinOptions = {
+            0: "None",
+            102: "Wrapped Reviver Mk.II",
+            104: "Carpet Bomber Mk.II",
+            105: "Masked Mender Mk.II",
+            106: "Woodland Warrior Mk.II",
+            109: "Forest Fire Mk.II",
+            112: "Backwoods Boomstick Mk.II",
+            113: "Woodsy Widowmaker Mk.II",
+            114: "Night Owl Mk.II",
+            120: "Iron Wood Mk.II",
+            122: "Plaid Potshotter Mk.II",
+            130: "Bovine Blazemaker Mk.II",
+            139: "Civil Servant Mk.II",
+            143: "Smalltown Bringdown Mk.II",
+            144: "Civic Duty Mk.II",
+            151: "Dead Reckoner Mk.II",
+            160: "Autumn Mk.II",
+            161: "Nutcracker Mk.II",
+            163: "Macabre Web Mk.II",
+            200: "Bloom Buffed",
+            201: "Quack Canvassed",
+            202: "Bank Rolled",
+            203: "Merc Stained",
+            204: "Kill Covered",
+            205: "Fire Glazed",
+            206: "Pizza Polished",
+            207: "Bonk Varnished",
+            208: "Star Crossed",
+            209: "Clover Camo'd",
+            210: "Freedom Wrapped",
+            211: "Cardboard Boxed",
+            212: "Dream Piped",
+            213: "Miami Element",
+            214: "Neo Tokyo",
+            215: "Geometrical Teams",
+            217: "Bomber Soul",
+            218: "Uranium",
+            220: "Cabin Fevered",
+            221: "Polar Surprise",
+            223: "Hana",
+            224: "Dovetailed",
+            225: "Cosmic Calamity",
+            226: "Hazard Warning",
+            228: "Mosaic",
+            230: "Jazzy",
+            232: "Alien Tech",
+            234: "Damascus and Mahogany",
+            235: "Skull Study",
+            236: "Haunted Ghosts",
+            237: "Spectral Shimmered",
+            238: "Spirit of Halloween",
+            239: "Horror Holiday",
+            240: "Totally Boned",
+            241: "Electroshocked",
+            242: "Ghost Town",
+            243: "Tumor Toasted",
+            244: "Calavera Canvas",
+            245: "Snow Covered",
+            246: "Frost Ornamented",
+            247: "Smissmas Village",
+            248: "Igloo",
+            249: "Seriously Snowed",
+            250: "Smissmas Camo",
+            251: "Sleighin' Style",
+            252: "Alpine",
+            253: "Gift Wrapped",
+            254: "Winterland Wrapped",
+            255: "Helldriver",
+            256: "Organ-ically Hellraised",
+            257: "Spectrum Splattered",
+            258: "Candy Coated",
+            259: "Pumpkin Pied",
+            260: "Sweet Toothed",
+            261: "Crawlspace Critters",
+            262: "Portal Plastered",
+            263: "Death Deluxe",
+            264: "Raving Dead",
+            265: "Eyestalker",
+            266: "Spider's Cluster",
+            267: "Gourdy Green",
+            268: "Mummified Mimic",
+            269: "Spider Season",
+            270: "Gingerbread Winner",
+            271: "Saccharine Striped",
+            272: "Elfin Enamel",
+            273: "Peppermint Swirl",
+            275: "Snow Globalization",
+            276: "Gifting Mann's Wrapping Paper",
+            277: "Snowflake Swirled",
+            278: "Smissmas Spycrabs",
+            279: "Frozen Aurora",
+            280: "Starlight Serenity",
+            281: "Frosty Delivery",
+            282: "Glacial Glazed",
+            283: "Cookie Fortress",
+            284: "Sarsaparilla Sprayed",
+            285: "Swashbuckled",
+            286: "Skull Cracked",
+            287: "Misfortunate",
+            289: "Neon-ween",
+            290: "Simple Spirits",
+            291: "Broken Bones",
+            292: "Potent Poison",
+            293: "Searing Souls",
+            294: "Party Phantoms",
+            295: "Polter-Guised",
+            296: "Kiln and Conquer",
+            297: "Necromanced",
+            300: "Yeti Coated",
+            301: "Park Pigmented",
+            302: "Mannana Peeled",
+            303: "Macaw Masked",
+            304: "Sax Waxed",
+            305: "Anodized Aloha",
+            306: "Bamboo Brushed",
+            307: "Tiger Buffed",
+            308: "Croc Dusted",
+            309: "Pi�a Polished",
+            310: "Leopard Printed",
+            390: "Dragon Slayer",
+            391: "Smissmas Sweater",
+            400: "Ghoul Blaster",
+            401: "Cream Corned",
+            402: "Sunriser",
+            403: "Sacred Slayer",
+            404: "Metalized Soul",
+            405: "Bonzo Gnawed",
+            406: "Health and Hell",
+            407: "Health and Hell (Green)",
+            408: "Hypergon",
+            409: "Pumpkin Plastered",
+            410: "Chilly Autumn",
+            411: "Steel Brushed",
+            412: "Secretly Serviced",
+            413: "Sky Stallion",
+            414: "Bomb Carrier",
+            415: "Business Class",
+            416: "Deadly Dragon",
+            417: "Team Serviced",
+            418: "Warborn",
+            419: "Pacific Peacemaker",
+            420: "Mechanized Monster"
+        };
+
+        const unusualOptions = {
+            0: "None",
+            4: "Community Sparkle",
+            701: "Hot",
+            702: "Isotope",
+            703: "Cool",
+            704: "Energy Orb",
+        };
+
+        const tierOptions = {
+            0: "None",
+            1: "Basic",
+            2: "Specialized",
+            3: "Professional"
+        }
+
+        const sheenOptions = {
+            0: "None",
+            1: "Team shine",
+            2: "Deadly daffodil",
+            3: "Manndarin",
+            4: "Mean green",
+            5: "Agonizing emerald",
+            6: "Villainous violet",
+            7: "Hot rod"
+        };
+
+        const effectOptions = {
+            0: "None",
+            1: "Cerebral Discharge",
+            2: "Fire Horns",
+            3: "Flames",
+            4: "Hypno-Beam",
+            5: "Incinerator",
+            6: "Singularity",
+            7: "Tornado"
+        }
+
+        const attributeInfo = {
+            834: { name: "paintkit_proto_def_index", label: "Paint kit skin", type: 3 },
+            866: { name: "custom_paintkit_seed_lo", label: "Paint kit seed (Low bytes)", type: 0 },
+            867: { name: "custom_paintkit_seed_hi", label: "Paint kit seed (High bytes)", type: 0 },
+            745: { name: "has_team_color_paintkit", label: "Paint kit is team coloured", type: 1 },
+            725: { name: "set_item_texture_wear", label: "Paint kit wear", type: 2 },
+            731: { name: "weapon_allow_inspect", label: "Can inspect", type: 1 },
+            370: { name: "set_attached_particle_static", label: "Unusual effect 2", type: 3 },
+            134: { name: "set_attached_particle", label: "Unusual effect 1", type: 3 },
+            2053: { name: "is_festivized", label: "Festivized", type: 1 },
+            2027: { name: "is_australium_item", label: "Australium", type: 1 },
+            2022: { name: "loot_rarity", label: "Loot rarity", type: 1 },
+            542: { name: "item_style_override", label: "Item style override", type: 1 },
+            2025: { name: "killstreak_tier", label: "Killstreak tier", type: 3 },
+            2014: { name: "killstreak_idleeffect", label: "Killstreak sheen", type: 3 },
+            2013: { name: "killstreak_effect", label: "Killstreak effect", type: 3 },
+            1007: { name: "halloween_pumpkin_explosions", label: "Pumpkin Bombs", type: 1},
+            1008: { name: "halloween_green_flames", label: "Halloween Flames", type: 1},
+            1006: { name: "halloween_voice_modulation", label: "Voices from Below", type: 1},
+            364: { name: "add_jingle_to_footsteps", label: "Jingle all the way", type: 1},
+            295: { name: "set_custom_buildmenu", label:"Pipboy build menu", type: 1}
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Page title -->
+            <div class="col-12">
+                <div style="text-align: center;">
+                    <h2>Skinchanger</h2>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="row">
+                <div class="d-flex">
+                    <div class="p-2 flex-grow-1">
+                        <h4>Weapon: <span id="weapon">None</span></h4>
+                    </div>
+
+                    <div class="p-2">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="save()">Save</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="load()">Load</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Editor -->
+        <div class="row p-2 border border-primary">
+
+            <!-- Possible attributes -->
+            <div class="col-md-3 border-end border-dashed border-primary-subtle">
+                <div class="container">
+                    <!-- Title -->
+                    <div class="row text-center">
+                        <p class="fs-4">Possible attributes</p>
+                    </div>
+
+                    <!-- Content -->
+                    <div id="possibleAttributes" class="row row-cols-1 gy-1"></div>
+                </div>
+            </div>
+
+            <!-- Selected attributes-->
+            <div class="col-md-3">
+                <div class="container">
+                    <!-- Title -->
+                    <div class="row text-center">
+                        <p class="fs-4">Selected attributes</p>
+                    </div>
+
+                    <!-- Content -->
+                    <div id="actualAttributes"></div>
+                </div>
+            </div>
+
+            <!-- Attribute values -->
+            <div class="col-md-6 border-start border-dashed border-primary-subtle">
+                <div class="container">
+                    <!-- Title -->
+                    <div class="row text-center">
+                        <p class="fs-4">Attribute values</p>
+                    </div>
+
+                    <!-- Content -->
+                    <div id="options"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const attributes = $("#possibleAttributes");
+        let weaponIndex = -1;
+
+        // Creates a new "possible attributes" button
+        function createAttributeButton(label, attrName, attrIndex, attrType) {
+            let $attrButton = $(`<button class="btn btn-primary"></button>`);
+            $attrButton.text(label);
+
+            $attrButton.click(function () {
+                addAttribute(label, attrName, attrType);
+            });
+
+            return $attrButton;
+        }
+
+        function updateAttribute(weaponIndex, attrName, value) {
+            $.get("/update", {
+                index: weaponIndex,
+                attribute: attrName,
+                value: value
+            });
+        }
+
+        function createAttributeValue(label, name, type) {
+            switch (type) {
+                case 0:
+                    // Integer
+                    {
+                        let $item = $(`<p>${label} <input class="float-end" type="number" value="0"></p>`);
+                        let $input = $item.find("input");
+
+                        $input.change(function () {
+                            updateAttribute(weaponIndex, name, $(this).val());
+                        });
+
+                        return $item;
+                    }
+
+                case 1:
+                    // Checkbox
+                    {
+                        // Does this send a 1 or a "true"? I think it sends a 1 :thinking: IT DOES NOT, IT SENDS "on" WTF LOL i hate javascript
+                        let $item = $(`<p>${label} <input class="float-end" type="checkbox"></p>`);
+                        let $input = $item.find("input");
+
+                        $input.change(function () {
+                            updateAttribute(weaponIndex, name, $(this).is(":checked") ? 1 : 0);
+                        });
+
+                        return $item;
+                    }
+
+                case 2:
+                    // Float
+                    {
+                        let $item = $(`<p>${label} <input class="float-end" type="number" value="0.0"></p>`);
+                        let $input = $item.find("input");
+
+                        $input.change(function () {
+                            updateAttribute(weaponIndex, name, $(this).val());
+                        });
+
+                        return $item;
+                    }
+
+                case 3:
+                    // Combo
+                    {
+                        $item = $(`<p>${label} <select class="float-end"></select></p>`);
+                        $list = $item.find("select");
+
+                        if (name == "paintkit_proto_def_index") {
+                            for (let key in skinOptions) {
+                                $list.append(`<option value="${key}">${skinOptions[key]}</option>`);
+                            }
+                        }
+                        if (name == "set_attached_particle" || name == "set_attached_particle_static") {
+                            for (let key in unusualOptions) {
+                                $list.append(`<option value="${key}">${unusualOptions[key]}</option>`);
+                            }
+                        }
+                        if (name == "killstreak_tier") {
+                            for (let key in tierOptions) {
+                                $list.append(`<option value="${key}">${tierOptions[key]}</option>`);
+                            }
+                        }
+                        if (name == "killstreak_idleeffect") {
+                            for (let key in sheenOptions) {
+                                $list.append(`<option value="${key}">${sheenOptions[key]}</option>`);
+                            }
+                        }
+                        if (name == "killstreak_effect") {
+                            for (let key in effectOptions){
+                                $list.append(`<option value="${key}">${effectOptions[key]}</option>`);
+                            }
+                        }
+
+                        $list.change(function () {
+                            updateAttribute(weaponIndex, name, $(this).val());
+                        });
+
+                        return $item;
+                    }
+
+                default: break;
+            }
+        }
+
+        function addAttribute(label, name, type) {
+            if ($(`#${name}`).length > 0) {
+                return;
+            }
+
+            if (weaponIndex == -1) {
+                return;
+            }
+
+            let $button = $(`<p>${label} <button type="button" class="btn btn-danger float-end">-</button></p>`);
+            $("#actualAttributes").append($button);
+
+            // Add the attribute value
+            let $valueItem = createAttributeValue(label, name, type);
+            $("#options").append($valueItem);
+
+            // add a onclick to the button
+            $button.find("button").click(function () {
+                $button.remove();
+                $valueItem.remove();
+                removeAttribute(name);
+            });
+
+            return $valueItem;
+        }
+
+        function removeAttribute(name) {
+            $.get(`/remove?index=${weaponIndex}&attribute=${name}`);
+        }
+
+        // I did this to myself
+        function updateWeaponIndex() {
+            $.get("/weaponIndex", function (data) {
+                // Update the attributes
+                let newIndex = parseInt(data);
+                if (weaponIndex != newIndex) {
+                    $.get("/getForIndex?index=" + data, function (data) {
+                        $("#actualAttributes").empty();
+                        $("#options").empty();
+
+                        if (data == null) {
+                            $("#weapon").text(data);
+                            return;
+                        }
+
+                        for (let key in data) {
+                            let attributeIndex = parseInt(key)
+                            let attribute = parseFloat(data[key]);
+                            let attrInfo = attributeInfo[attributeIndex] ?? { name: "default", label: "Unknown", type: 0 };
+
+                            $valueItem = addAttribute(attrInfo.label, attrInfo.name, attrInfo.type);
+                            switch (attrInfo.type) {
+                                case 0:
+                                    $valueItem.find("input").val(attribute);
+                                    break;
+                                case 1:
+                                    $valueItem.find("input").prop("checked", attribute == 1);
+                                    break;
+                                case 2:
+                                    $valueItem.find("input").val(attribute);
+                                    break;
+                                case 3:
+                                    $valueItem.find("select").val(attribute);
+                                    break;
+                                default: break;
+                            }
+                        }
+                    });
+                }
+
+                // Update the weapon name/index
+                weaponIndex = newIndex;
+                if (weaponIndex == -1) {
+                    ("#weapon").text(data);
+                } else {
+                    $("#weapon").text(weaponNames[newIndex] ?? data);
+                }
+            });
+        }
+
+        function save() {
+            $.get("/save", function (data) {
+            });
+        }
+
+        function load() {
+            $.get("/load", function (data) {
+                weaponIndex = -1;
+                updateWeaponIndex();
+                // Call the change event on the weapon index to update the attributes
+                let options = $("#options");
+                // Go through each attribute, and call the change event on it
+                options.children().each(function () {
+                    $(this).children().each(function () {
+                        $(this).change();
+                    });
+                });
+            });
+        }
+
+
+        // Initialize
+        $(document).ready(function () {
+            // type 0 = int
+            // type 1 = bool
+            // type 2 = float
+            // type 3 = combo (lets do special cases for each type of combo (mainly set_attached_particle and killstreak_idleeffect))
+
+            // Create attribute buttons
+            attributes.append(createAttributeButton("Paint kit skin", "paintkit_proto_def_index", 834, 3));
+            attributes.append(createAttributeButton("Paint kit wear", "set_item_texture_wear", 725, 2));
+            //attributes.append(button("Paint kit seed (Low bytes)", "custom_paintkit_seed_lo", 866, 0));
+            //attributes.append(button("Paint kit seed (High bytes)", "custom_paintkit_seed_hi", 867, 0));
+            attributes.append(createAttributeButton("Paint kit is team coloured", "has_team_color_paintkit", 745, 1));
+            attributes.append(createAttributeButton("Unusual effect 1", "set_attached_particle", 134, 3));
+            attributes.append(createAttributeButton("Unusual effect 2", "set_attached_particle_static", 370, 3));
+            attributes.append(createAttributeButton("Festivized", "is_festivized", 2053, 1));
+            attributes.append(createAttributeButton("Australium", "is_australium_item", 2027, 1));
+            attributes.append(createAttributeButton("Killstreak Tier", "killstreak_tier", 2025, 3)); // I assume that 1=basic, 2=specialized, and 3=professional, although it could be a bool
+            attributes.append(createAttributeButton("Item style override", "item_style_override", 542, 1));
+            attributes.append(createAttributeButton("Killstreak sheen", "killstreak_idleeffect", 2014, 3));
+            attributes.append(createAttributeButton("Killstreak effect", "killstreak_effect", 2013, 3));
+            attributes.append(createAttributeButton("Pumpkin Bombs", "halloween_pumpkin_explosions", 1007, 1));
+            attributes.append(createAttributeButton("Halloween Flames", "halloween_green_flames", 1008, 1));
+            attributes.append(createAttributeButton("Voices from Below", "halloween_voice_modulation", 1006, 1));
+            attributes.append(createAttributeButton("Jingle all the way", "add_jingle_to_footsteps", 364, 1));
+            attributes.append(createAttributeButton("Pip-Boy Build Menu", "set_custom_buildmenu", 295, 1));
+
+            // Not setTimeout idiot
+            setInterval(updateWeaponIndex, 1000);
+        });
+    </script>
+</body>
+
+</html>
